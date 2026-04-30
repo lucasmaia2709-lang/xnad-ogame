@@ -50,20 +50,26 @@
             border-radius: 1rem;
             text-align: center;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
         }
+        /* Ajuste fino para o HUD no telemóvel */
         #hud {
             position: absolute;
-            top: 0;
+            top: 10px;
             left: 0;
             width: 100%;
-            padding: 1rem;
+            padding: 0 15px; /* Margem lateral menor */
             display: flex;
             justify-content: space-between;
-            font-size: 1.5rem;
+            align-items: flex-start;
+            font-size: 1rem; /* Fonte reduzida para caber no telemóvel */
             font-weight: bold;
             color: #831843;
             pointer-events: none;
             box-sizing: border-box;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8); /* Sombra para melhorar leitura */
+            z-index: 10;
         }
     </style>
 </head>
@@ -73,8 +79,8 @@
     <canvas id="gameCanvas"></canvas>
     
     <div id="hud">
-        <div>Pontos: <span id="scoreDisplay">0</span></div>
-        <div>Vidas: <span id="livesDisplay">❤️❤️❤️</span></div>
+        <div id="scoreDisplay">R$ 0</div>
+        <div id="livesDisplay">❤️❤️❤️</div>
     </div>
 
     <div id="ui-layer">
@@ -83,7 +89,7 @@
             <p class="text-gray-600 mb-6">Move o Xandão para não perder a corrupção!</p>
             <p class="text-sm text-gray-500 mb-4">Usa as setas ⬅️ ➡️ ou desliza o dedo no ecrã.</p>
 
-            <button id="startBtn" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition transform hover:scale-105 active:scale-95">
+            <button id="startBtn" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition transform hover:scale-105 active:scale-95 w-full">
                 Começar a Jogar
             </button>
         </div>
@@ -91,7 +97,7 @@
         <div id="gameOverScreen" class="ui-panel hidden">
             <h1 class="text-4xl font-bold text-red-500 mb-2">Fim de Jogo!</h1>
             <p class="text-xl text-gray-700 mb-4">Acumulaste <span id="finalScore" class="font-bold text-pink-600">0</span>.</p>
-            <button id="restartBtn" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition transform hover:scale-105 active:scale-95">
+            <button id="restartBtn" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition transform hover:scale-105 active:scale-95 w-full">
                 Jogar Novamente
             </button>
         </div>
@@ -99,7 +105,7 @@
         <div id="winScreen" class="ui-panel hidden">
             <h1 class="text-4xl font-bold text-green-500 mb-2">Parabéns! 🎉</h1>
             <p class="text-xl text-gray-700 mb-4">Atingiste a meta de <span class="font-bold text-green-600">R$ 129.000.000</span>!</p>
-            <button id="winRestartBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition transform hover:scale-105 active:scale-95">
+            <button id="winRestartBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition transform hover:scale-105 active:scale-95 w-full">
                 Jogar Novamente
             </button>
         </div>
@@ -260,16 +266,16 @@
         ctx.shadowOffsetX = 2;
         ctx.shadowOffsetY = 2;
 
-        // Ícone/Imagem do Banco
-        ctx.font = '50px Arial';
+        // Ícone/Imagem do Banco (Tamanho reduzido para mobile)
+        ctx.font = '35px Arial';
         ctx.textBaseline = 'bottom';
-        ctx.fillText('🏦', canvas.width / 2, 60);
+        ctx.fillText('🏦', canvas.width / 2, 45);
 
-        // Texto "BANCO MASTER"
-        ctx.font = 'bold 36px "Segoe UI", Arial, sans-serif';
+        // Texto "BANCO MASTER" (Tamanho reduzido para mobile)
+        ctx.font = 'bold 24px "Segoe UI", Arial, sans-serif';
         ctx.fillStyle = '#831843'; // Cor rosa escura a combinar com o tema
         ctx.textBaseline = 'top';
-        ctx.fillText('BANCO MASTER', canvas.width / 2, 65);
+        ctx.fillText('BANCO MASTER', canvas.width / 2, 50);
         
         ctx.restore();
     }
@@ -330,7 +336,7 @@
                 // Apanhou!
                 donuts.splice(i, 1);
                 i--;
-                score += 300000; // <--- VALOR ALTERADO AQUI PARA 300.000
+                score += 300000;
                 updateHUD();
 
                 // Condição de Vitória: Atingir 129 Milhões
@@ -361,6 +367,7 @@
 
     // Atualizar Pontos e Vidas no HTML
     function updateHUD() {
+        // Removida a palavra "Pontos:" para economizar espaço
         scoreDisplay.innerText = "R$ " + score.toLocaleString('pt-BR');
         let hearts = '';
         for (let i = 0; i < lives; i++) hearts += '❤️';
