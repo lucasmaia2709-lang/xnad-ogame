@@ -123,7 +123,6 @@
     const finalScoreDisplay = document.getElementById('finalScore');
 
     // 🎨 COLOCA OS LINKS DAS TUAS IMAGENS AQUI:
-    // Trocado para caminhos relativos. Eles devem estar na mesma pasta que o index.html.
     const urlImagemPauzinho = 'Design sem nome (1).png'; 
     const urlImagemItem = 'pngtree-money-sack-cartoon-image-png-image_16085048.png';     
 
@@ -185,8 +184,8 @@
             this.x = Math.random() * (canvas.width - this.size) + this.radius;
             this.y = -this.size; // Começa fora do ecrã no topo
             
-            // A velocidade aumenta ligeiramente com a pontuação (ajustado para blocos de 100.000)
-            this.speed = baseDonutSpeed + (Math.random() * 2) + ((score / 100000) * 0.05);
+            // A velocidade aumenta ligeiramente com a pontuação (ajustado para blocos de 300.000)
+            this.speed = baseDonutSpeed + (Math.random() * 2) + ((score / 300000) * 0.05);
             this.emoji = '💰';
             
             // Ligeira rotação para efeito visual
@@ -331,7 +330,7 @@
                 // Apanhou!
                 donuts.splice(i, 1);
                 i--;
-                score += 100000;
+                score += 300000; // <--- VALOR ALTERADO AQUI PARA 300.000
                 updateHUD();
 
                 // Condição de Vitória: Atingir 129 Milhões
