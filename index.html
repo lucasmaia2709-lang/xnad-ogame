@@ -70,16 +70,13 @@
 <body>
 
 <div id="game-container">
-    <!-- Tela do Jogo -->
     <canvas id="gameCanvas"></canvas>
     
-    <!-- HUD (Pontuação e Vidas) -->
     <div id="hud">
         <div>Pontos: <span id="scoreDisplay">0</span></div>
         <div>Vidas: <span id="livesDisplay">❤️❤️❤️</span></div>
     </div>
 
-    <!-- Ecrãs de UI (Início e Fim de Jogo) -->
     <div id="ui-layer">
         <div id="startScreen" class="ui-panel">
             <h1 class="text-3xl font-bold text-pink-600 mb-4">Apanha o Dinheiro! 💰</h1>
@@ -126,10 +123,9 @@
     const finalScoreDisplay = document.getElementById('finalScore');
 
     // 🎨 COLOCA OS LINKS DAS TUAS IMAGENS AQUI:
-    // Mantém as aspas e cola o link lá dentro. Deixa vazio ('') se quiseres usar o desenho padrão.
-    // As barras foram alteradas para barras normais (/) para que o Javascript consiga ler o caminho corretamente no Windows.
-    const urlImagemPauzinho = 'https://github.com/lucasmaia2709-lang/xnad-ogame/blob/main/Design%20sem%20nome%20(1).png'; 
-    const urlImagemItem = 'https://github.com/lucasmaia2709-lang/xnad-ogame/blob/main/pngtree-money-sack-cartoon-image-png-image_16085048.png';     
+    // Trocado para caminhos relativos. Eles devem estar na mesma pasta que o index.html.
+    const urlImagemPauzinho = 'Design sem nome (1).png'; 
+    const urlImagemItem = 'pngtree-money-sack-cartoon-image-png-image_16085048.png';     
 
     let customPaddleImg = null;
     let customDonutImg = null;
